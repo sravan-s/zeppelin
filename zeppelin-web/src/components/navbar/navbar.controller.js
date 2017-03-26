@@ -107,6 +107,16 @@ function NavCtrl($scope, $rootScope, $http, $routeParams, $location,
     });
   }
 
+  function restartZeppelin() {
+    let restartURL = baseUrlSrv.getRestApiBase() + '/restart';
+    let restartPromise = $http.post(restartURL, {
+      ticket: $rootScope.ticket.ticket
+    });
+    restartPromise.then((data, err) => {
+      console.log(data, err);
+    });
+  }
+
   function search(searchTerm) {
     $location.path('/search/' + searchTerm);
   }
