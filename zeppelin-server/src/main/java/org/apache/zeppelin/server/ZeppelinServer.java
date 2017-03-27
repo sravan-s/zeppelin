@@ -46,6 +46,7 @@ import org.apache.zeppelin.notebook.repo.NotebookRepoSync;
 import org.apache.zeppelin.rest.ConfigurationsRestApi;
 import org.apache.zeppelin.rest.CredentialRestApi;
 import org.apache.zeppelin.rest.HeliumRestApi;
+import org.apache.zeppelin.rest.RestartRestApi;
 import org.apache.zeppelin.rest.InterpreterRestApi;
 import org.apache.zeppelin.rest.LoginRestApi;
 import org.apache.zeppelin.rest.NotebookRepoRestApi;
@@ -382,6 +383,9 @@ public class ZeppelinServer extends Application {
 
     HeliumRestApi heliumApi = new HeliumRestApi(helium, notebook);
     singletons.add(heliumApi);
+
+    RestartRestApi restartRestApi = new RestartRestApi();
+    singletons.add(restartRestApi);
 
     InterpreterRestApi interpreterApi = new InterpreterRestApi(interpreterSettingManager,
         notebookWsServer);

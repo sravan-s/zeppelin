@@ -30,6 +30,7 @@ function NavCtrl($scope, $rootScope, $http, $routeParams, $location,
   vm.showLoginWindow = showLoginWindow;
   vm.TRASH_FOLDER_ID = TRASH_FOLDER_ID;
   vm.isFilterNote = isFilterNote;
+  vm.restartZeppelin = restartZeppelin;
 
   $scope.query = {q: ''};
 
@@ -108,13 +109,28 @@ function NavCtrl($scope, $rootScope, $http, $routeParams, $location,
   }
 
   function restartZeppelin() {
-    let restartURL = baseUrlSrv.getRestApiBase() + '/restart';
-    let restartPromise = $http.post(restartURL, {
-      ticket: $rootScope.ticket.ticket
+    $http({
+      method: 'POST',
+      url: baseUrlSrv.getRestApiBase() + '/restart',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        'userName': 'ad',
+        'password': '$scope.loginParams.password'
+      }
     });
-    restartPromise.then((data, err) => {
-      console.log(data, err);
-    });
+    // let restartPromise = $http({
+    //   method: 'POST',
+    //   url: baseUrlSrv.getRestApiBase() + '/restart',
+    //   headers: {
+    //     'Content-Type': 'application/x-www-form-urlencoded'
+    //   },
+    //   data: $rootScope.ticket
+    // });
+    // restartPromise.then((data, err) => {
+    //   console.log(data, err);
+    // });
   }
 
   function search(searchTerm) {
