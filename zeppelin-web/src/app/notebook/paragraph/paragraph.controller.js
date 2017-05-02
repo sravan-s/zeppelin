@@ -1188,17 +1188,9 @@ function ParagraphCtrl ($scope, $rootScope, $route, $window, $routeParams, $loca
 
   $scope.updateAllScopeTexts = function (oldPara, newPara) {
     if (oldPara.text !== newPara.text) {
-      if ($scope.dirtyText) {         // check if editor has local update
-        if ($scope.dirtyText === newPara.text) {  // when local update is the same from remote, clear local update
-          $scope.paragraph.text = newPara.text
-          $scope.dirtyText = undefined
-          $scope.originalText = angular.copy(newPara.text)
-        } else { // if there're local update, keep it.
-          $scope.paragraph.text = newPara.text
-        }
-      } else {
-        $scope.paragraph.text = newPara.text
-        $scope.originalText = angular.copy(newPara.text)
+      if ($scope.dirtyText === undefined || $scope.originalText === $scope.dirtyText) { // local changes are invalid
+        $scope.paragraph.text = newPara.text;
+        $scope.originalText = angular.copy(newPara.text);
       }
     }
   }
