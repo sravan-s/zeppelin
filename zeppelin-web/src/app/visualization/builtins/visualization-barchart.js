@@ -110,6 +110,9 @@ export default class BarchartVisualization extends Nvd3ChartVisualization {
     }
 
     this.chart.dispatch.on('stateChange', function(s) {
+      if (self.config.stacked === s.stacked) {
+        return
+      }
       configObj.stacked = s.stacked
 
       // give some time to animation finish

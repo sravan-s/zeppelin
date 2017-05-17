@@ -123,6 +123,9 @@ export default class AreachartVisualization extends Nvd3ChartVisualization {
     this.chart.style(this.config.style || 'stack')
 
     this.chart.dispatch.on('stateChange', function (s) {
+      if (self.config.style === s.style) {
+        return
+      }
       self.config.style = s.style
 
       // give some time to animation finish
